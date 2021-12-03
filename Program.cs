@@ -10,7 +10,8 @@ Application.Init();
 
 List<IDay> days = new()
 {
-    new Day1(sessionId)
+    new Day1(sessionId),
+    new Day2(sessionId)
 };
 
 var title = new Label("Advent of Code 2021")

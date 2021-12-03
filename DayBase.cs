@@ -8,9 +8,9 @@ public abstract class DayBase : IDay
 
     public abstract string Name { get; }
 
-    public virtual Task<string> PartOne() => Task.FromResult("Foo!");
+    public abstract Task<string> PartOne();
 
-    public virtual Task<string> PartTwo() => Task.FromResult("Bar!");
+    public abstract Task<string> PartTwo();
 
     public override string ToString() => Name;
 
