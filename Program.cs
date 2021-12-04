@@ -11,7 +11,8 @@ Application.Init();
 List<IDay> days = new()
 {
     new Day1(sessionId),
-    new Day2(sessionId)
+    new Day2(sessionId),
+    new Day3(sessionId)
 };
 
 var title = new Label("Advent of Code 2021")
@@ -64,8 +65,8 @@ var outputView = new TextView
 dayList.OpenSelectedItem += async eventArgs =>
 {
     var day = (IDay)eventArgs.Value;
-    outputView.Text += $" {day.Name}, Part One: {await day.PartOne()}{NewLine}";
-    outputView.Text += $" {day.Name}, Part Two: {await day.PartTwo()}{NewLine}";
+    outputView.Text = $" {day.Name}, Part One: {await day.PartOne()}{NewLine}{outputView.Text}";
+    outputView.Text = $" {day.Name}, Part Two: {await day.PartTwo()}{NewLine}{outputView.Text}";
 };
 
 rightPane.Add(outputView);
