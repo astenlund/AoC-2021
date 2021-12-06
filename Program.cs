@@ -14,7 +14,8 @@ List<IDay> days = new()
     new Day2(sessionId),
     new Day3(sessionId),
     new Day4(sessionId),
-    new Day5(sessionId)
+    new Day5(sessionId),
+    new Day6(sessionId)
 };
 
 var title = new Label("Advent of Code 2021")
@@ -63,12 +64,11 @@ var outputView = new TextView
     CanFocus = false
 };
 
-// ReSharper disable once AsyncVoidLambda
 dayList.OpenSelectedItem += async eventArgs =>
 {
     var day = (IDay)eventArgs.Value;
-    outputView.Text = $" {day.Name}, Part One: {await day.PartOne()}{NewLine}{outputView.Text}";
-    outputView.Text = $" {day.Name}, Part Two: {await day.PartTwo()}{NewLine}{outputView.Text}";
+    outputView.Text = $" {day}, Part One: {await day.PartOne()}{NewLine}{outputView.Text}";
+    outputView.Text = $" {day}, Part Two: {await day.PartTwo()}{NewLine}{outputView.Text}";
 };
 
 rightPane.Add(outputView);

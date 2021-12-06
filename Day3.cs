@@ -11,7 +11,7 @@ public class Day3 : DayBase
     {
     }
 
-    public override string Name => "Day 3";
+    private protected override ushort Day => 3;
 
     public override async Task<string> PartOne()
     {
@@ -89,7 +89,7 @@ public class Day3 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput(3);
+        Input ??= await GetInput();
         Lines = Input.Trim().Split("\n");
     }
 }

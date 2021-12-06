@@ -11,7 +11,7 @@ public class Day2 : DayBase
     {
     }
 
-    public override string Name => "Day 2";
+    private protected override ushort Day => 2;
 
     public override async Task<string> PartOne()
     {
@@ -59,7 +59,7 @@ public class Day2 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput(2);
+        Input ??= await GetInput();
         Lines ??= Input.Trim().Split("\n").Select(l =>
         {
             var split = l.Split(" ");

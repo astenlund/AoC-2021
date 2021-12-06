@@ -6,17 +6,17 @@ public abstract class DayBase : IDay
 
     private protected DayBase(string session) => Session = session;
 
-    public abstract string Name { get; }
+    private protected abstract ushort Day { get; }
 
     public abstract Task<string> PartOne();
 
     public abstract Task<string> PartTwo();
 
-    public override string ToString() => Name;
+    public override string ToString() => $"Day {Day}";
 
-    private protected async Task<string> GetInput(int day)
+    private protected async Task<string> GetInput()
     {
-        var uri = new Uri($"https://adventofcode.com/2021/day/{day}/input");
+        var uri = new Uri($"https://adventofcode.com/2021/day/{Day}/input");
         using HttpClient client = new();
         client.DefaultRequestHeaders.Add("Cookie", $"session={Session}");
         var response = await client.GetAsync(uri);
