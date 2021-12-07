@@ -19,4 +19,13 @@ public static class Extensions
     }
 
     public static BigInteger Sum(this IEnumerable<BigInteger> value) => value.Aggregate(new BigInteger(0), (acc, item) => acc + item);
+
+    public static double GetMedian(this IEnumerable<int> value)
+    {
+        var arr = value.OrderBy(x => x).ToArray();
+        var length = arr.Length;
+        return length % 2 == 0
+            ? (arr[length / 2 - 1] + arr[length / 2]) / 2
+            : arr[(length - 1) / 2];
+    }
 }
