@@ -28,4 +28,8 @@ public static class Extensions
             ? (arr[length / 2 - 1] + arr[length / 2]) / 2
             : arr[(length - 1) / 2];
     }
+
+    public static string Concat(this IEnumerable<char> value) => string.Concat(value);
+
+    public static int Concat(this IEnumerable<int> value) => value.Aggregate(0, (acc, val) => acc * 10 + val);
 }
