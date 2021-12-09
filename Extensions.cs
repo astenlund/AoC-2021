@@ -32,4 +32,6 @@ public static class Extensions
     public static string Concat(this IEnumerable<char> value) => string.Concat(value);
 
     public static int Concat(this IEnumerable<int> value) => value.Aggregate(0, (acc, val) => acc * 10 + val);
+
+    public static int Product(this IEnumerable<int> value) => value.Aggregate(1, (acc, val) => acc * val);
 }

@@ -17,7 +17,8 @@ List<IDay> days = new()
     new Day5(sessionId),
     new Day6(sessionId),
     new Day7(sessionId),
-    new Day8(sessionId)
+    new Day8(sessionId),
+    new Day9(sessionId)
 };
 
 var title = new Label("Advent of Code 2021")
