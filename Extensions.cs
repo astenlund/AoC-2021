@@ -18,7 +18,15 @@ public static class Extensions
             action();
     }
 
+    public static IEnumerable<T> Times<T>(this int value, Func<T> func)
+    {
+        for (var i = 0; i < value; i++)
+            yield return func();
+    }
+
     public static BigInteger Sum(this IEnumerable<BigInteger> value) => value.Aggregate(new BigInteger(0), (acc, item) => acc + item);
+
+    public static int Sum(this int[,] value) => value.Cast<int>().Sum();
 
     public static double GetMedian(this IEnumerable<int> value)
     {
