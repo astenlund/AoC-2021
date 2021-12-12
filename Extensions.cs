@@ -12,6 +12,10 @@ public static class Extensions
         return result[0];
     }
 
+    public static bool IsLower(this string value) => value.All(char.IsLower);
+
+    public static bool IsUpper(this string value) => value.All(char.IsUpper);
+
     public static void Times(this int value, Action action)
     {
         for (var i = 0; i < value; i++)
