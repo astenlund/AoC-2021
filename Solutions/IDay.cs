@@ -1,4 +1,4 @@
-﻿namespace AoC_2021;
+﻿namespace AoC_2021.Solutions;
 
 public interface IDay
 {
