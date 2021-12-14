@@ -27,7 +27,8 @@ List<IDay> days = new()
     new Day10(sessionId),
     new Day11(sessionId),
     new Day12(sessionId),
-    new Day13(sessionId)
+    new Day13(sessionId),
+    new Day14(sessionId)
 };
 
 List<string> parts = new()

@@ -46,4 +46,7 @@ public static class Extensions
     public static int Concat(this IEnumerable<int> value) => value.Aggregate(0, (acc, val) => acc * 10 + val);
 
     public static int Product(this IEnumerable<int> value) => value.Aggregate(1, (acc, val) => acc * val);
+
+    public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> value) where TKey : notnull =>
+        value.ToDictionary(pair => pair.Key, pair => pair.Value);
 }
