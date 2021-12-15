@@ -38,8 +38,8 @@ public class Day14 : DayBase
 
     private IDictionary<char, ulong> Polymerize(int iterations)
     {
-        var pairs = new DefaultDictionary<(char left, char right), ulong>(0UL);
-        var elements = new DefaultDictionary<char, ulong>(0UL) { { Template![0], 1 } };
+        var pairs = new DefaultDictionary<(char left, char right), ulong>(() => 0UL);
+        var elements = new DefaultDictionary<char, ulong>(() => 0UL) { { Template![0], 1 } };
 
         for (var i = 1; i < Template!.Length; i++)
         {
@@ -52,7 +52,7 @@ public class Day14 : DayBase
 
         for (var i = 0; i < iterations; i++)
         {
-            var newPairs = new DefaultDictionary<(char left, char right), ulong>(0UL);
+            var newPairs = new DefaultDictionary<(char left, char right), ulong>(() => 0UL);
 
             foreach (var rule in Rules!.Where(rule => pairs.ContainsKey(rule.Key)))
             {

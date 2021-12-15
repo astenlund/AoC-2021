@@ -2,16 +2,16 @@
 
 public class DefaultDictionary<TKey, TValue> : Dictionary<TKey, TValue> where TKey : notnull
 {
-    private readonly TValue Default;
+    private readonly Func<TValue> Init;
 
-    public DefaultDictionary(TValue defaultValue) => Default = defaultValue;
+    public DefaultDictionary(Func<TValue> init) => Init = init;
 
     public new TValue this[TKey key]
     {
         get
         {
             if (!ContainsKey(key))
-                Add(key, Default);
+                Add(key, Init());
 
             return base[key];
         }

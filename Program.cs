@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using AoC_2021;
 using AoC_2021.Solutions;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +29,8 @@ List<IDay> days = new()
     new Day11(sessionId),
     new Day12(sessionId),
     new Day13(sessionId),
-    new Day14(sessionId)
+    new Day14(sessionId),
+    new Day15(sessionId)
 };
 
 List<string> parts = new()
@@ -116,12 +118,16 @@ partList.OpenSelectedItem += async eventArgs =>
             dayList.SetFocus();
             break;
         case 1:
-            rightPane.Title = $"Output: {selectedDay} Part 1";
-            outputView.Text = FormatOutput(await selectedDay!.PartOne());
+            rightPane.Title = $"Output: {selectedDay}, Part 1";
+            var (result1, time1) = await Measure(async () => await selectedDay!.PartOne());
+            outputView.Text = FormatResult(result1);
+            rightPane.Title += $" ({FormatTime(time1)})";
             break;
         case 2:
-            rightPane.Title = $"Output: {selectedDay} Part 2";
-            outputView.Text = FormatOutput(await selectedDay!.PartTwo());
+            rightPane.Title = $"Output: {selectedDay}, Part 2";
+            var (result2, time2) = await Measure(async () => await selectedDay!.PartTwo());
+            outputView.Text = FormatResult(result2);
+            rightPane.Title += $" ({FormatTime(time2)})";
             break;
     }
 };
@@ -137,6 +143,24 @@ statusBar.Items = new []
 {
     new StatusItem(Key.C | Key.CtrlMask, "~CTRL-C~ Quit", () => Application.RequestStop())
 };
+
+Application.Top.KeyDown += KeyDownHandler;
+
+Application.Top.Add(title);
+Application.Top.Add(leftPane);
+Application.Top.Add(rightPane);
+Application.Top.Add(statusBar);
+
+Application.Run();
+
+string FormatResult(string output) => NewLine + " " + string.Join(NewLine + " ", Regex.Split(output, @"\r?\n"));
+
+string FormatTime(TimeSpan timeSpan) =>
+    timeSpan.TotalSeconds > 1
+        ? $"{timeSpan:s\\.ff}s"
+        : $"{timeSpan:fff}ms";
+
+View? GetActiveView() => leftPane.Subviews.SelectMany(v => v.Subviews).SingleOrDefault();
 
 void KeyDownHandler(KeyEventEventArgs eventArgs)
 {
@@ -162,15 +186,11 @@ void KeyDownHandler(KeyEventEventArgs eventArgs)
     }
 }
 
-Application.Top.KeyDown += KeyDownHandler;
+async Task<(string result, TimeSpan time)> Measure(Func<Task<string>> func)
+{
+    var s = Stopwatch.StartNew();
+    var result = await func();
+    var time = TimeSpan.FromMilliseconds(s.ElapsedMilliseconds);
 
-Application.Top.Add(title);
-Application.Top.Add(leftPane);
-Application.Top.Add(rightPane);
-Application.Top.Add(statusBar);
-
-Application.Run();
-
-string FormatOutput(string output) => NewLine + " " + string.Join(NewLine + " ", Regex.Split(output, @"\r?\n"));
-
-View? GetActiveView() => leftPane.Subviews.SelectMany(v => v.Subviews).SingleOrDefault();
+    return (result, time);
+}
