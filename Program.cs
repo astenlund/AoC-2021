@@ -11,26 +11,28 @@ var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
 var sessionId = config["SessionId"];
 var selectedDay = default(IDay);
 var digitKeyHandler = new DigitKeyHandler(TimeSpan.FromMilliseconds(300));
+var input = args.Any() ? args[0] : null;
 
 Application.Init();
 
 List<IDay> days = new()
 {
-    new Day1(sessionId),
-    new Day2(sessionId),
-    new Day3(sessionId),
-    new Day4(sessionId),
-    new Day5(sessionId),
-    new Day6(sessionId),
-    new Day7(sessionId),
-    new Day8(sessionId),
-    new Day9(sessionId),
-    new Day10(sessionId),
-    new Day11(sessionId),
-    new Day12(sessionId),
-    new Day13(sessionId),
-    new Day14(sessionId),
-    new Day15(sessionId)
+    new Day1(sessionId, input),
+    new Day2(sessionId, input),
+    new Day3(sessionId, input),
+    new Day4(sessionId, input),
+    new Day5(sessionId, input),
+    new Day6(sessionId, input),
+    new Day7(sessionId, input),
+    new Day8(sessionId, input),
+    new Day9(sessionId, input),
+    new Day10(sessionId, input),
+    new Day11(sessionId, input),
+    new Day12(sessionId, input),
+    new Day13(sessionId, input),
+    new Day14(sessionId, input),
+    new Day15(sessionId, input),
+    new Day16(sessionId, input)
 };
 
 List<string> parts = new()

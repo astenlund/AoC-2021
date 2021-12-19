@@ -6,10 +6,9 @@ public class Day15 : DayBase
 {
     private Node? Goal;
     private Node[,]? Grid;
-    private string? Input;
     private Node? Start;
 
-    internal Day15(string session) : base(session)
+    internal Day15(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -144,9 +143,9 @@ public class Day15 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
+        await base.Initialize();
 
-        var lines = Regex.Split(Input.Trim(), @"\r?\n").ToArray();
+        var lines = Regex.Split(Input!.Trim(), @"\r?\n").ToArray();
 
         Grid = new Node[lines[0].Length, lines.Length];
 

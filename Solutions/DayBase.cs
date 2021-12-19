@@ -3,8 +3,13 @@
 public abstract class DayBase : IDay
 {
     private readonly string Session;
+    private protected string? Input;
 
-    private protected DayBase(string session) => Session = session;
+    private protected DayBase(string session, string? input)
+    {
+        Session = session;
+        Input = input;
+    }
 
     private protected abstract ushort Day { get; }
 
@@ -14,7 +19,7 @@ public abstract class DayBase : IDay
 
     public override string ToString() => $"Day {Day}";
 
-    private protected async Task<string> GetInput()
+    private async Task<string> GetInput()
     {
         var uri = new Uri($"https://adventofcode.com/2021/day/{Day}/input");
         using HttpClient client = new();
@@ -24,5 +29,8 @@ public abstract class DayBase : IDay
         return await response.Content.ReadAsStringAsync();
     }
 
-    private protected abstract Task Initialize();
+    private protected virtual async Task Initialize()
+    {
+        Input ??= await GetInput();
+    }
 }

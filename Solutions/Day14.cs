@@ -4,11 +4,10 @@ namespace AoC_2021.Solutions;
 
 public class Day14 : DayBase
 {
-    private string? Input;
     private Dictionary<(char left, char right), char>? Rules;
     private string? Template;
 
-    internal Day14(string session) : base(session)
+    internal Day14(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -78,9 +77,9 @@ public class Day14 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
+        await base.Initialize();
 
-        var lines = Regex.Split(Input.Trim(), @"\r?\n").ToArray();
+        var lines = Regex.Split(Input!.Trim(), @"\r?\n").ToArray();
 
         Template = lines.First();
         Rules = lines.Skip(2).Select(RuleSelector).ToDictionary();

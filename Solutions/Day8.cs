@@ -20,10 +20,9 @@ public class Day8 : DayBase
 
     private (string[] patterns, string[] output)[]? Entries;
 
-    private string? Input;
     private string[]? Lines;
 
-    internal Day8(string session) : base(session)
+    internal Day8(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -102,8 +101,9 @@ public class Day8 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Lines = Regex.Split(Input.Trim(), @"\r?\n");
+        await base.Initialize();
+
+        Lines = Regex.Split(Input!.Trim(), @"\r?\n");
         Entries = Lines.Select(line =>
         {
             var strs = Regex.Split(line.Trim(), @"\s*\|\s*");

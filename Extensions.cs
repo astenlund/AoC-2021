@@ -47,6 +47,8 @@ public static class Extensions
 
     public static int Product(this IEnumerable<int> value) => value.Aggregate(1, (acc, val) => acc * val);
 
+    public static long Product(this IEnumerable<long> value) => value.Aggregate(1L, (acc, val) => acc * val);
+
     public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> value) where TKey : notnull =>
         value.ToDictionary(pair => pair.Key, pair => pair.Value);
 }

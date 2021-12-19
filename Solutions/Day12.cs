@@ -5,9 +5,8 @@ namespace AoC_2021.Solutions;
 public class Day12 : DayBase
 {
     private Dictionary<string, List<string>>? Connections;
-    private string? Input;
 
-    internal Day12(string session) : base(session)
+    internal Day12(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -55,9 +54,9 @@ public class Day12 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
+        await base.Initialize();
 
-        var lines = Regex.Split(Input.Trim(), @"\r?\n");
+        var lines = Regex.Split(Input!.Trim(), @"\r?\n");
         var edges = lines.Select(l => l.Split('-')).ToArray();
         var caves = edges.SelectMany(e => e).Distinct().ToArray();
 

@@ -2,10 +2,9 @@
 
 public class Day1 : DayBase
 {
-    private string? Input;
     private List<int>? Lines;
 
-    public Day1(string session) : base(session)
+    public Day1(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -42,7 +41,8 @@ public class Day1 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Lines ??= Input.Trim().Split("\n").Select(int.Parse).ToList();
+        await base.Initialize();
+
+        Lines ??= Input!.Trim().Split("\n").Select(int.Parse).ToList();
     }
 }

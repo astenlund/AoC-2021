@@ -28,10 +28,9 @@ public class Day10 : DayBase
         { '<', '>' }
     };
 
-    private string? Input;
     private string[]? Lines;
 
-    internal Day10(string session) : base(session)
+    internal Day10(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -89,7 +88,8 @@ public class Day10 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Lines = Regex.Split(Input.Trim(), @"\r?\n");
+        await base.Initialize();
+
+        Lines = Regex.Split(Input!.Trim(), @"\r?\n");
     }
 }

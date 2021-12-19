@@ -5,10 +5,9 @@ namespace AoC_2021.Solutions;
 public class Day11 : DayBase
 {
     private int[,]? Grid;
-    private string? Input;
     private string[]? Lines;
 
-    internal Day11(string session) : base(session)
+    internal Day11(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -92,8 +91,9 @@ public class Day11 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Lines = Regex.Split(Input.Trim(), @"\r?\n");
+        await base.Initialize();
+
+        Lines = Regex.Split(Input!.Trim(), @"\r?\n");
         Grid = new int[Lines[0].Length, Lines.Length];
 
         for (var y = 0; y < Lines.Length; y++)

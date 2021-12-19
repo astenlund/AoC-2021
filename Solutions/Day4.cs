@@ -4,10 +4,9 @@ namespace AoC_2021.Solutions;
 
 public class Day4 : DayBase
 {
-    private string? Input;
     private string[]? Lines;
 
-    public Day4(string session) : base(session)
+    public Day4(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -66,7 +65,8 @@ public class Day4 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Lines ??= Input.Trim().Split("\n").Where(l => !string.IsNullOrEmpty(l.Trim())).ToArray();
+        await base.Initialize();
+
+        Lines ??= Input!.Trim().Split("\n").Where(l => !string.IsNullOrEmpty(l.Trim())).ToArray();
     }
 }

@@ -4,10 +4,9 @@ namespace AoC_2021.Solutions;
 
 public class Day7 : DayBase
 {
-    private string? Input;
     private int[]? Positions;
 
-    internal Day7(string session) : base(session)
+    internal Day7(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -40,7 +39,8 @@ public class Day7 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Positions = Input.Split(',').Select(int.Parse).ToArray();
+        await base.Initialize();
+
+        Positions = Input!.Split(',').Select(int.Parse).ToArray();
     }
 }

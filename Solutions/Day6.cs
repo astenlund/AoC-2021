@@ -5,9 +5,8 @@ namespace AoC_2021.Solutions;
 public class Day6 : DayBase
 {
     private BigInteger[]? FishBuckets;
-    private string? Input;
 
-    public Day6(string session) : base(session)
+    public Day6(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -48,10 +47,11 @@ public class Day6 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
+        await base.Initialize();
+
         FishBuckets = new BigInteger[9];
 
-        foreach (var timer in Input.Split(',').Select(uint.Parse))
+        foreach (var timer in Input!.Split(',').Select(uint.Parse))
             FishBuckets[timer]++;
     }
 }

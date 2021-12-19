@@ -4,11 +4,10 @@ namespace AoC_2021.Solutions;
 
 public class Day5 : DayBase
 {
-    private string? Input;
     private string[]? Lines;
     private (int x1, int y1, int x2, int y2)[]? Vectors;
 
-    public Day5(string session) : base(session)
+    public Day5(string session, string? input = null) : base(session, input)
     {
     }
 
@@ -75,8 +74,9 @@ public class Day5 : DayBase
 
     private protected override async Task Initialize()
     {
-        Input ??= await GetInput();
-        Lines ??= Input.Trim().Split("\n").Where(l => !string.IsNullOrEmpty(l.Trim())).ToArray();
+        await base.Initialize();
+
+        Lines ??= Input!.Trim().Split("\n").Where(l => !string.IsNullOrEmpty(l.Trim())).ToArray();
         Vectors ??= Lines.Select(l =>
         {
             var match = Regex.Match(l, @"(\d+),(\d+) -> (\d+),(\d+)");
