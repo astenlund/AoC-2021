@@ -28,6 +28,15 @@ public static class Extensions
             yield return func();
     }
 
+    public static IEnumerable<(T first, T second)> Permute<T>(this IEnumerable<T> value)
+    {
+        var arr = value.ToArray();
+
+        foreach (var u in arr)
+        foreach (var v in arr)
+            yield return (u, v);
+    }
+
     public static BigInteger Sum(this IEnumerable<BigInteger> value) => value.Aggregate(new BigInteger(0), (acc, item) => acc + item);
 
     public static int Sum(this int[,] value) => value.Cast<int>().Sum();
